@@ -33,7 +33,7 @@ const Player = () => {
                 </div>
                 <div className='flex gap-4 pl-2'>
                     <span>
-                        <AiOutlineHeart size={16}/>
+                        <AiFillHeart size={16}/>
                     </span>
                     <span>
                         <BsThreeDots size={16}/> 
