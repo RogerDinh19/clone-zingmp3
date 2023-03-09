@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React ,{useEffect} from "react";
+import { Home ,Login, Public, Persional} from './pages/public';
+import path from "./ultis/path";
+import { Routes,Route } from "react-router-dom";
+import * as actions from "../src/redux/action";
+import { useDispatch } from "react-redux";
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(actions.getHome())
+	}, [])
+	
+
+	return (
+		<div>
+			<Routes>
+				<Route path={path.PUBLIC} element={<Public/>}>
+					<Route path={path.HOME} element={<Home/>} />
+					<Route path={path.LOGIN} element={<Login/>} />
+					<Route path={path.MY_MUSIC} element={<Persional/>} />				
+					<Route path={path.STAR} element={<Home/>} />
+
+				</Route>
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
