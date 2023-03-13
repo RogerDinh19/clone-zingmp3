@@ -1,5 +1,5 @@
 import React ,{useEffect} from "react";
-import { Home ,Login, Public, Persional} from './pages/public';
+import { Home ,Login, Public, Persional, Album} from './pages/public';
 import path from "./ultis/path";
 import { Routes,Route } from "react-router-dom";
 import * as actions from "../src/redux/action";
@@ -20,7 +20,10 @@ function App() {
 				<Route path={path.PUBLIC} element={<Public/>}>
 					<Route path={path.HOME} element={<Home/>} />
 					<Route path={path.LOGIN} element={<Login/>} />
-					<Route path={path.MY_MUSIC} element={<Persional/>} />				
+					<Route path={path.MY_MUSIC} element={<Persional/>} />
+					<Route path={path.ALBUM__TITLE__PID} element={<Album/>} />
+
+
 					<Route path={path.STAR} element={<Home/>} />
 
 				</Route>

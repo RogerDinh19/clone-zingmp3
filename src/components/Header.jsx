@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <div className='flex justify-between w-full'>
             <div className='flex gap-6 items-center w-full'>
-                <div className='flex gap-6 text-gray-300'>
+                <div className='flex gap-6 text-gray-400'>
                     <span><HiOutlineArrowNarrowLeft size={24}/></span>
                     <span><HiOutlineArrowNarrowRight  size={24}/></span>
                 </div>
