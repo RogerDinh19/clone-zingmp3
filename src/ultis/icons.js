@@ -2,9 +2,10 @@ import {MdOutlineLibraryMusic,MdRadio,MdSkipNext,MdSkipPrevious } from 'react-ic
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
 import {TbChartDots3} from 'react-icons/tb';
 import {RiCompassDiscoverFill,RiChatFollowUpLine} from 'react-icons/ri';
-import {HiOutlineArrowNarrowLeft , HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import {HiOutlineArrowNarrowLeft , HiOutlineArrowNarrowRight ,} from 'react-icons/hi';
 import { CiSearch, CiRepeat, CiShuffle } from 'react-icons/ci';
-import { BsThreeDots , BsPlayFill , BsPauseFill} from 'react-icons/bs';
+import { BsThreeDots , BsPlayFill , BsPauseFill,BsDot } from 'react-icons/bs';
+import { IoMusicalNotesOutline } from 'react-icons/io5'
 
 
 const icons = {
@@ -24,7 +25,9 @@ const icons = {
     MdSkipPrevious,
     CiShuffle,
     BsPlayFill,
-    BsPauseFill
+    BsPauseFill,
+    IoMusicalNotesOutline,
+    BsDot
 }
 
 export default icons 

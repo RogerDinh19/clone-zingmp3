@@ -1,7 +1,8 @@
-import React , {useEffect,useState} from 'react';
-import { useSelector } from 'react-redux';
+import React , {useEffect,useState,useRef} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import * as apis from '../apis';
 import icons from '../ultis/icons';
+import * as actions from '../redux/action';
 
 const { AiFillHeart, AiOutlineHeart , BsThreeDots, MdSkipNext , MdSkipPrevious , CiRepeat,
         BsPauseFill,BsPlayFill,CiShuffle
@@ -10,10 +11,10 @@ const { AiFillHeart, AiOutlineHeart , BsThreeDots, MdSkipNext , MdSkipPrevious ,
 
 const Player = () => {
 
-    const audioEl = new Audio()
     const { curSongId, isPlaying } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
-    const [source, setSource] = useState(null)
+    const [audio, setAudio] = useState(new Audio())
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchDetailSong = async() => {
@@ -27,15 +28,27 @@ const Player = () => {
             }
 
             if (res2.data.err === 0) {
-                setSource(res2.data.data['128'])
+                audio.pause()
+                setAudio(new Audio(res2.data.data['128']))
             }
         }
 
         fetchDetailSong()
     }, [curSongId])
 
+    useEffect(() => {
+        audio.load()
+        if (isPlaying) audio.play()
+    }, [audio])
+
     const handleTogglePlayMusic = () => {
-        
+        if (isPlaying) {
+            audio.pause()
+            dispatch(actions.play(false))
+        }else{
+            audio.play()
+            dispatch(actions.play(true))
+        }
     }
     
     return (
