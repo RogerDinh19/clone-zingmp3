@@ -18,6 +18,8 @@ const ListItem = ({songData}) => {
         onClick={() => {
             dispatch(actions.setCurSongId(songData?.encodeId))
             dispatch(actions.play(true))
+            dispatch(actions.playAlbum(true))
+
         }}
         >
             <div className='flex items-center flex-1 gap-2'>

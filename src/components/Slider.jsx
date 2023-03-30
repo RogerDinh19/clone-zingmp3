@@ -57,10 +57,14 @@ const Slider = () => {
         if ( item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId)) 
             dispatch(actions.play(true))
+            dispatch(actions.setPlaylist(null))
         }else if ( item?.type === 4 ) {
             const albumPath = item?.link?.split('.')[0]
             navigate(albumPath)
-        } 
+        } else {
+            dispatch(actions.setPlaylist(null))
+
+        }
         
     }
     
@@ -74,7 +78,7 @@ const Slider = () => {
                         src={item.banner} 
                         alt="" 
                         onClick={() => handleClickBanner(item)}
-                        className={`slider-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`}
+                        className={`slider-item flex-1 object-contain w-[30%] rounded-lg cursor-pointer ${index <= 2 ? 'block' : 'hidden'}`}
                     />
                 ))}
             </div>       

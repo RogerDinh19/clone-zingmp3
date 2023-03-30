@@ -4,6 +4,8 @@ import path from "./ultis/path";
 import { Routes,Route } from "react-router-dom";
 import * as actions from "../src/redux/action";
 import { useDispatch } from "react-redux";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -28,7 +30,20 @@ function App() {
 
 				</Route>
 			</Routes>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</div>
+		
 	);
 }
 

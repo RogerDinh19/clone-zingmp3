@@ -3,21 +3,28 @@ import { useParams } from 'react-router-dom'
 import * as apis from '../../apis'
 import moment from 'moment/moment'
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { ListsSong } from '../../components'
+import { ListsSong, AudioLoading } from '../../components'
+import { useDispatch , useSelector} from 'react-redux';
+import * as actions from '../../redux/action'
+import icons from '../../ultis/icons';
+
+const { BsPlayFill } = icons
+
 
 const Album = () => {
 
     const {title, pid } = useParams()
+    const { curSongId, isPlaying, songs} = useSelector(state => state.music)
     const [playListData, setPlayListData] = useState({})
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchDetailPlayList = async () => {
             const response = await apis.apiGetDetailPlayList(pid)
             if (response?.data.err === 0 ) {
                 setPlayListData(response.data?.data)
+                dispatch(actions.setPlaylist(response?.data?.data?.song?.items))
             }
-
-            console.log(response)
         }
 
         fetchDetailPlayList()
@@ -27,7 +34,18 @@ const Album = () => {
     return (
         <div className='px-[59px] flex w-full h-full gap-5 pt-5'>
                 <div className=' flex-none w-1/4 flex flex-col items-center gap-2 sticky top-9'>
-                    <img src={playListData?.thumbnailM} alt=""  className='w-full object-contain rounded-md shadow-md'  />
+                    <div className='w-full relative overflow-hidden'>
+                        <img 
+                            src={playListData?.thumbnailM} 
+                            alt=""  
+                            className={`w-full object-contain ${isPlaying ? 'rounded-full animate-rotate-center' : 'rounded-md '} shadow-md `} />
+
+                        <div className={`absolute top-0 left-0 bottom-0 right-0 hover:bg-overlay-30 ${isPlaying ? 'hover:rounded-full' : ''} text-white flex justify-center items-center`}>
+                            <span className='p-3 border border-white rounded-full'>
+                                {isPlaying ? <AudioLoading/> : <BsPlayFill size={30}/> }                                     
+                            </span> 
+                        </div>
+                    </div>
                     <h3 className='text-[20px] font-bold text-[#32323d]'>{playListData?.title}</h3>
                     <span 
                         className='text-gray-500 text-xs flex flex-col items-center gap-2'
@@ -44,7 +62,7 @@ const Album = () => {
                                 <span>{playListData?.sortDescription}</span>
                             </span>
                             <div >
-                                <ListsSong songs={playListData?.song?.items} totalDuration={playListData?.song?.totalDuration} />
+                                <ListsSong  totalDuration={playListData?.song?.totalDuration} />
                             </div>
                     </div>
                 </Scrollbars>

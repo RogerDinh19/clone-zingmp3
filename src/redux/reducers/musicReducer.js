@@ -2,7 +2,9 @@ import actionType from "../action/actionType";
 
 const initState = {
     curSongId: null,
-    isPlaying: false
+    isPlaying: false,
+    atAlbum: false,
+    songs: null
 }
 
 const musicReducer = (state = initState,action ) => {
@@ -18,6 +20,17 @@ const musicReducer = (state = initState,action ) => {
                 ...state,
                 isPlaying: action.flag
             }
+        case actionType.SET_ALBUM:
+            return {
+                ...state,
+                atAlbum: action.flag
+            }
+        case actionType.PLAYLIST:
+            return {
+                ...state,
+                songs: action.songs || null
+            }        
+            
         default:
             return state
     }
