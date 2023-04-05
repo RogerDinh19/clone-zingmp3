@@ -3,7 +3,14 @@ import actionType from "../action/actionType";
 
 const initState = {
     banner: [],
-    artist: {}
+    artist: {},
+    theHappyWeekend: {},
+    chill: {},
+
+
+    isLoading: false,
+
+    
 }
 
 const appReducer = (state = initState,action ) => {
@@ -12,8 +19,15 @@ const appReducer = (state = initState,action ) => {
             return {
                 ...state,
                 banner: action.homeData?.find(item => item.sectionId ==='hSlider')?.items || null,
-                artist: action.homeData?.find(item => item.sectionId ==='hArtistTheme') || null
-                
+                artist: action.homeData?.find(item => item.sectionId ==='hArtistTheme') || null,
+                theHappyWeekend: action.homeData?.find(item => item.sectionId ==='hEditorTheme2') || null,
+                chill: action.homeData?.find(item => item.sectionId ==='hEditorTheme') || null   
+            }
+
+        case actionType.LOADING:
+            return{
+                ...state,
+                isLoading: action.flag
             }
     
         default:
